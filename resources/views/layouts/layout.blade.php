@@ -13,6 +13,9 @@
     </header>
 
     <main class="py-4">
+        <div class="container">
+            @yield('register-alert')
+        </div>
         <div class="container d-flex flex-row gap-3">
             @yield('content')
         </div>

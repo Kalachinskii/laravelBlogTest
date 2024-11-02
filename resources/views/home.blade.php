@@ -2,9 +2,16 @@
 
 @section('title', 'Home')
 
+@section('register-alert')
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{session('success')}}
+        </div>
+    @endif
+@endsection
+
 @section('content')
     @foreach ($posts as $post)
-
         <div class="card" style="width: 18rem;" data-id="{{$post->category->id}}">
             <img src="
             {{$post->image ? asset("img/{$post->image}") : asset("img/no-image.avif")}}" class="card-img-top" alt="...">

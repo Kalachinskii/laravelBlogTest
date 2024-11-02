@@ -1,6 +1,6 @@
 @extends('layouts.user.auth')
 
-@section('title', 'Home')
+@section('title', 'Login')
 
 @section('errors-form')
                     {{-- ошибки --}}
@@ -13,8 +13,19 @@
     @endif
 @endsection
 
+@section('login-error')
+                    {{-- ошибки --}}
+    @if (session('login-error'))
+        <ul class="bg-danger">
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+@endsection
+
 @section('content')
-    <form class="w-50 mx-auto" method="POST" action="{{route('user.store')}}">
+    <form class="w-50 mx-auto" method="POST" action="{{route('user.checkLogin')}}">
         @csrf
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Почтовый адресс</label>
@@ -24,12 +35,8 @@
             <label for="exampleInputPassword1" class="form-label">Пароль</label>
             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Проверка паролья</label>
-            <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword1">
-        </div>
 
-        <button type="submit" class="btn btn-primary">Регистрация</button>
+        <button type="submit" class="btn btn-primary">Авторизация</button>
     
     </form>
 

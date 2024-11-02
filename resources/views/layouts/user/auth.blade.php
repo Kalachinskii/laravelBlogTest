@@ -13,6 +13,12 @@
     </header> --}}
 
     <main class="py-4">
+        <div class="container">
+            @yield('login-error')
+        </div>
+        <div class="container">
+            @yield('errors-form')
+        </div>
         <div class="container d-flex align-items-center justify-content-center" style="height: 90vh">
             @yield('content')
         </div>
