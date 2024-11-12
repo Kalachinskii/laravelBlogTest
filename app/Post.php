@@ -24,4 +24,10 @@ class Post extends Model
         $posts = Post::with('category:id,name')->get();
         return $posts;
     }
+
+    public function users()
+    {
+        // отношения «многие ко многим»
+        return $this->belongsToMany(User::class);
+    }
 }

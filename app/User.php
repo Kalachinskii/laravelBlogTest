@@ -38,4 +38,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+        // отношения «многие ко многим»
+        return $this->belongsToMany(Post::class);
+    }
 }
