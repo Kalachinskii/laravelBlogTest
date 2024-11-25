@@ -15,8 +15,9 @@
     <main class="py-4">
         <div class="container">
             @yield('register-alert')
+            @yield('fail')
         </div>
-        <div class="container d-flex flex-row gap-3">
+        <div class="container content-container d-flex flex-row gap-3">
             @yield('content')
         </div>
     </main>
@@ -25,6 +26,8 @@
     <footer>
         @include('includes.footer')
     </footer>
+    {{-- SCRIPTS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

@@ -17,9 +17,18 @@
                     {{-- ошибки --}}
     @if (session('login-error'))
         <ul class="bg-danger">
-            @foreach ($errors->all() as $error)
+            {{-- @foreach ($errors->all() as $error)
                 <li>{{$error}}</li>
-            @endforeach
+            @endforeach --}}
+            <div class="alert alert-danger">{{session('login-error')}}</div>
+        </ul>
+    @endif
+@endsection
+
+@section('error')
+    @if (session('error'))
+        <ul class="alert alert-danger">
+            <div class="alert alert-danger">{{session('error')}}</div>
         </ul>
     @endif
 @endsection
