@@ -44,5 +44,56 @@ document
                     .querySelector(".container")
                     .insertAdjacentHTML("afterbegin", alert);
             }
+        } else if (e.target.matches(".btn-edit")) {
+            const postId = e.target.dataset.id;
+
+            const resp = await fetch(`admin/${postId}/edit`);
+            const res = await resp.json();
+
+            if (res !== `false`) {
+                const { post, categories } = res;
+                console.log(categories);
+                console.log(post);
+
+                document.querySelector(".form-edit #title").value = post.title;
+                document.querySelector(".form-edit #description").value =
+                    post.description;
+                document
+                    .querySelector(".form-edit #image")
+                    .parentElement.querySelector(".post-image")
+                    ?.remove();
+                document.querySelector(".form-edit #image").insertAdjacentHTML(
+                    "beforebegin",
+                    `
+                    <img src=${
+                        post.image
+                            ? `../img/${post.image}`
+                            : `../img/no-photo.jpg`
+                    } class="card-img-top post-image w-25 d-inline-block col-1" alt="...">
+                    `
+                );
+
+                document.querySelector("#category").innerHTML = "";
+
+                const out = categories.map(
+                    (cat) =>
+                        `<option data-id="${cat.id}" ${
+                            post.category_id === cat.id ? "selected" : ""
+                        } value="${cat.name}">${cat.name}</option> `
+                );
+
+                document
+                    .querySelector(".form-edit select")
+                    .insertAdjacentHTML("beforeend", out.join(""));
+            } else {
+                const alert = `<div class="alert alert-danger">
+                    Ошибка! Не удалось получить данные поста
+                </div>`;
+                document.querySelector(".alert")?.remove();
+
+                document
+                    .querySelector(".container")
+                    .insertAdjacentHTML("afterbegin", alert);
+            }
         }
     });

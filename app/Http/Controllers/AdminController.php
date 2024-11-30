@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class AdminController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('admin.index', compact('posts'));
+        $categories = Category::all();
+        return view('admin.index', compact('posts', 'categories'));
     }
 
     /**
@@ -45,10 +47,7 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    public function show($id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -58,7 +57,14 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $categories = Category::all();
+
+        if ($post and $categories) {
+            echo json_encode(['post' => $post, 'categories' => $categories]);
+        } else {
+            echo `false`;
+        }
     }
 
     /**
